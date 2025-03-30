@@ -8,6 +8,7 @@ from app.tool import Terminate, ToolCollection
 from app.tool.browser_use_tool import BrowserUseTool
 from app.tool.python_execute import PythonExecute
 from app.tool.str_replace_editor import StrReplaceEditor
+from app.tool.pylsp import PythonLSPTool
 
 
 class Manus(BrowserAgent):
@@ -28,12 +29,12 @@ class Manus(BrowserAgent):
     next_step_prompt: str = NEXT_STEP_PROMPT
 
     max_observe: int = 10000
-    max_steps: int = 20
+    max_steps: int = 5
 
     # Add general-purpose tools to the tool collection
     available_tools: ToolCollection = Field(
         default_factory=lambda: ToolCollection(
-            PythonExecute(), BrowserUseTool(), StrReplaceEditor(), Terminate()
+            PythonLSPTool(), PythonExecute(), BrowserUseTool(), StrReplaceEditor(), Terminate()
         )
     )
 
